@@ -1,0 +1,186 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+nav {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #444;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 30px auto; 
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type=text],
+input[type=password],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 1px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+    display: block;
+
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus {
+    border-color: #666;
+}
+
+input[type=submit] {
+    background: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+input[type=submit]:hover {
+    background: #444;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: #f7f7f7;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+ul li:hover {
+    transform: translateX(5px);
+}
+
+.note-item {
+    position: relative;
+    padding: 10px;
+    background: #f7f7f7;
+    margin: 5px 0;
+    border-radius: 4px;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.note-item:hover {
+    transform: translateX(5px);
+}
+
+.actions {
+    margin-left: 10px;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 1.1em;
+    line-height: 1;
+    transition: transform 0.2s;
+}
+
+.actions button:hover {
+    transform: scale(1.1);
+}
+
+.edit-form {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.edit-form input[type="text"] {
+    width: 200px;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.confirm-btn {
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    margin-left: 0px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.confirm-btn:hover {
+    background: #444;
+}
+
+.note-content {
+    flex: 1;
+    margin-right: 10px;
+    white-space: pre-wrap;
+}
+

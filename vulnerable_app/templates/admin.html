@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Администрирование</h2>
+<p>Вы вошли как администратор. Ниже список всех пользователей (кроме admin) и их заметок:</p>
+<table style="width:100%; border-collapse: collapse;">
+    <tr>
+        <th style="border-bottom:1px solid #ddd; text-align:left; padding:8px;">ID</th>
+        <th style="border-bottom:1px solid #ddd; text-align:left; padding:8px;">Имя пользователя</th>
+        <th style="border-bottom:1px solid #ddd; text-align:left; padding:8px;">Количество заметок</th>
+        <th style="border-bottom:1px solid #ddd; text-align:left; padding:8px;">Действия</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td style="border-bottom:1px solid #ddd; padding:8px;">{{ user['id'] }}</td>
+        <td style="border-bottom:1px solid #ddd; padding:8px;">{{ user['username'] }}</td>
+        <td style="border-bottom:1px solid #ddd; padding:8px;">{{ user['notes_count'] }}</td>
+        <td style="border-bottom:1px solid #ddd; padding:8px;">
+            <form method="post" action="{{ url_for('admin_delete_user') }}" style="display:inline-block;">
+                <input type="hidden" name="user_id" value="{{ user['id'] }}">
+                <button type="submit" style="background:#c00;color:#fff;border:none;border-radius:4px;padding:5px;cursor:pointer;">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

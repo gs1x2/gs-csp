@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Управление настройками</h2>
+
+<form method="post">
+    <label>
+        <input type="checkbox" name="block_on_ip_change" value="1" 
+            {% if block_ip == '1' %}checked{% endif %}>
+        Блокировать при смене IP
+    </label><br>
+
+    <label>
+        <input type="checkbox" name="block_on_ua_change" value="1"
+            {% if block_ua == '1' %}checked{% endif %}>
+        Блокировать при смене User-Agent
+    </label><br>
+
+    <label>
+        Время бана (минуты): 
+        <input type="number" name="ban_minutes_after_blocked" value="{{ ban_minutes or '5' }}">
+    </label><br><br>
+
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

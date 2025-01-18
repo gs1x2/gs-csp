@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Управление сессиями</h2>
+
+<form method="post" action="{{ url_for('admin_clear_db') }}">
+    <button type="submit" style="background-color: #c33; color: #fff;">Очистить БД</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cookie</th>
+            <th>Username</th>
+            <th>IP</th>
+            <th>User-Agent</th>
+            <th>Color</th>
+            <th>Active?</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Blocked until</th>
+            <th>Deactivate</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for s in sessions %}
+        {% set style_col = "" %}
+        {% if "red" in s.color_flags %}
+            {% set style_col = style_col + "color: #f00;" %}
+        {% endif %}
+        {% if "yellow" in s.color_flags %}
+            {% set style_col = style_col + " background-color: #ffec99;" %}
+        {% endif %}
+        {% if "orange" in s.color_flags %}
+            {% set style_col = style_col + " border: 2px solid orange;" %}
+        {% endif %}
+        <tr style="{{ style_col }}">
+            <td>{{ s.id }}</td>
+            <td>{{ s.session_cookie }}</td>
+            <td>{{ s.username }}</td>
+            <td>{{ s.user_ip }}</td>
+            <td>{{ s.user_agent }}</td>
+            <td>{{ s.color_flags }}</td>
+            <td>{{ 'Yes' if s.is_active == 1 else 'No' }}</td>
+            <td>{{ s.created_at }}</td>
+            <td>{{ s.updated_at }}</td>
+            <td>{{ s.blocked_until if s.blocked_until else '' }}</td>
+            <td>
+                {% if s.is_active == 1 %}
+                <form method="post" action="{{ url_for('admin_deactivate_session', session_id=s.id) }}">
+                    <button type="submit">Деактивировать</button>
+                </form>
+                {% else %}
+                Уже деактивирована
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

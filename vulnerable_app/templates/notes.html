@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Мои заметки</h2>
+<form method="post">
+    <textarea name="content" placeholder="Новая заметка" required></textarea><br>
+    <input type="submit" value="Добавить">
+</form>
+<ul>
+    {% for note in notes %}
+    <li data-note-id="{{ note['id'] }}" class="note-item">
+        <form method="post" action="{{ url_for('update_note') }}" class="edit-form" style="display:none;">
+            <input type="hidden" name="note_id" value="{{ note['id'] }}">
+            <input type="text" name="new_content" value="{{ note['content'] }}" required>
+            <button type="submit" class="confirm-btn">✔</button>
+        </form>
+        <span class="note-content">{{ note['content'] }}</span>
+        <div class="actions" style="display:none;">
+            <button class="edit-btn" type="button">✏</button>
+            <form method="post" action="{{ url_for('delete_note') }}" style="display:inline;">
+                <input type="hidden" name="note_id" value="{{ note['id'] }}">
+                <button type="submit" class="delete-btn">🗑</button>
+            </form>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

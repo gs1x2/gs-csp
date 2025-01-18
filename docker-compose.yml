@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  vulnerable_app:
+    build:
+      context: ./vulnerable_app
+    # Не пробрасываем наружу. Только внутри docker-сети.
+    expose:
+      - "5000"
+    # Если нужно, чтобы Flask слушал 0.0.0.0:5000
+    # можно добавить ENV переменные и прочее
+    environment:
+      - FLASK_RUN_HOST=0.0.0.0
+    networks:
+      - my_network
+
+  session_guard:
+    build:
+      context: ./session_guard
+    # Мапим внешний порт 80 на внутренний 8000
+    ports:
+      - "80:80"
+    depends_on:
+      - vulnerable_app
+    networks:
+      - my_network
+    environment:
+      # Передаём URL уязвимого сервиса, чтобы guard_app знал, куда проксировать
+      - TARGET_SERVICE_URL=http://vulnerable_app:5000
+      - GUARD_HOST=0.0.0.0
+      - GUARD_PORT=80
+
+networks:
+  my_network:
+    driver: bridge
